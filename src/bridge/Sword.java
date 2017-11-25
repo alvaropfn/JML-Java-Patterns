@@ -20,28 +20,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package adapter;
+package bridge;
 
 /**
- *
- * Adapter class. Adapts the interface of the device ({@link FishingBoat}) into {@link RowingBoat}
- * interface expected by the client ({@link Captain}).
+ * 
+ * Sword
  *
  */
-public class FishingBoatAdapter implements RowingBoat {
+public class Sword implements Weapon {
 
-  private	/*@ spec_public @*/ FishingBoat boat;
-  
+  private final Enchantment enchantment;
 
-  /*@ requires boat == null;
-   	ensures boat != null;
-    @*/
-  public FishingBoatAdapter() {
-    boat = new FishingBoat();
+  public Sword(Enchantment enchantment) {
+    this.enchantment = enchantment;
   }
 
   @Override
-  public void row() {
-    boat.sail();
+  public void wield() {
+	  System.out.println("The sword is wielded.");
+    enchantment.onActivate();
+  }
+
+  @Override
+  public void swing() {
+	  System.out.println("The sword is swinged.");
+    enchantment.apply();
+  }
+
+  @Override
+  public void unwield() {
+	  System.out.println("The sword is unwielded.");
+    enchantment.onDeactivate();
+  }
+
+  @Override
+  public Enchantment getEnchantment() {
+    return enchantment;
   }
 }

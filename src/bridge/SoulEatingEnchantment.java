@@ -20,28 +20,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package adapter;
+package bridge;
 
 /**
- *
- * Adapter class. Adapts the interface of the device ({@link FishingBoat}) into {@link RowingBoat}
- * interface expected by the client ({@link Captain}).
+ * 
+ * SoulEatingEnchantment
  *
  */
-public class FishingBoatAdapter implements RowingBoat {
+public class SoulEatingEnchantment implements Enchantment {
 
-  private	/*@ spec_public @*/ FishingBoat boat;
-  
-
-  /*@ requires boat == null;
-   	ensures boat != null;
-    @*/
-  public FishingBoatAdapter() {
-    boat = new FishingBoat();
+  @Override
+  public void onActivate() {
+	  System.out.println("The item spreads bloodlust.");
   }
 
   @Override
-  public void row() {
-    boat.sail();
+  public void apply() {
+	  System.out.println("The item eats the soul of enemies.");
+  }
+
+  @Override
+  public void onDeactivate() {
+	  System.out.println("Bloodlust slowly disappears.");
   }
 }
