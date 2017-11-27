@@ -20,12 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.iluwatar.abstractfactory;
+package abstractfactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.iluwatar.abstractfactory.App.FactoryMaker.KingdomType;
+import abstractfactory.App.FactoryMaker.KingdomType;
 
 /**
  * 
@@ -43,8 +40,6 @@ import com.iluwatar.abstractfactory.App.FactoryMaker.KingdomType;
  * 
  */
 public class App {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
   private King king;
   private Castle castle;
@@ -131,17 +126,17 @@ public class App {
   public static void main(String[] args) {
 
     App app = new App();
-
-    LOGGER.info("Elf Kingdom");
+    
+    System.out.println("Elf Kingdom");
     app.createKingdom(FactoryMaker.makeFactory(KingdomType.ELF));
-    LOGGER.info(app.getArmy().getDescription());
-    LOGGER.info(app.getCastle().getDescription());
-    LOGGER.info(app.getKing().getDescription());
+    System.out.println(app.getArmy().getDescription());
+    System.out.println(app.getCastle().getDescription());
+    System.out.println(app.getKing().getDescription());
 
-    LOGGER.info("Orc Kingdom");
+    System.out.println("Orc Kingdom");
     app.createKingdom(FactoryMaker.makeFactory(KingdomType.ORC));
-    LOGGER.info(app.getArmy().getDescription());
-    LOGGER.info(app.getCastle().getDescription());
-    LOGGER.info(app.getKing().getDescription());
+    System.out.println(app.getArmy().getDescription());
+    System.out.println(app.getCastle().getDescription());
+    System.out.println(app.getKing().getDescription());
   }
 }
