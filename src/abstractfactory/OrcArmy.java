@@ -20,42 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bridge;
+package com.iluwatar.abstractfactory;
 
 /**
  * 
- * Hammer
+ * OrcArmy
  *
  */
-public class Hammer implements Weapon {
+public class OrcArmy implements Army {
 
-  private final /*@ spec_public @*/ Enchantment enchantment;
-  
-  
-  public Hammer(/*@ non_null @*/Enchantment enchantment) {
-    this.enchantment = enchantment;
-  }
+  static final String DESCRIPTION = "This is the Orc Army!";
 
   @Override
-  public void wield() {
-	  System.out.println("The hammer is wielded.");
-    enchantment.onActivate();
-  }
-
-  @Override
-  public void swing() {
-	  System.out.println("The hammer is swinged.");
-    enchantment.apply();
-  }
-
-  @Override
-  public void unwield() {
-	  System.out.println("The hammer is unwielded.");
-    enchantment.onDeactivate();
-  }
-
-  @Override
-  public Enchantment getEnchantment() {
-    return enchantment;
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

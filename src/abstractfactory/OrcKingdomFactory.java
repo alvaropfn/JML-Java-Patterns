@@ -20,42 +20,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bridge;
+package com.iluwatar.abstractfactory;
 
 /**
  * 
- * Hammer
- *
+ * OrcKingdomFactory concrete factory.
+ * 
  */
-public class Hammer implements Weapon {
+public class OrcKingdomFactory implements KingdomFactory {
 
-  private final /*@ spec_public @*/ Enchantment enchantment;
-  
-  
-  public Hammer(/*@ non_null @*/Enchantment enchantment) {
-    this.enchantment = enchantment;
+  public Castle createCastle() {
+    return new OrcCastle();
   }
 
-  @Override
-  public void wield() {
-	  System.out.println("The hammer is wielded.");
-    enchantment.onActivate();
+  public King createKing() {
+    return new OrcKing();
   }
 
-  @Override
-  public void swing() {
-	  System.out.println("The hammer is swinged.");
-    enchantment.apply();
-  }
-
-  @Override
-  public void unwield() {
-	  System.out.println("The hammer is unwielded.");
-    enchantment.onDeactivate();
-  }
-
-  @Override
-  public Enchantment getEnchantment() {
-    return enchantment;
+  public Army createArmy() {
+    return new OrcArmy();
   }
 }
