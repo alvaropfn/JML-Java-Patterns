@@ -34,7 +34,7 @@ public class FishingBoatAdapter implements RowingBoat {
   
 
   /*@ requires boat == null;
-   	ensures boat != null;
+     ensures boat != null;
     @*/
   public FishingBoatAdapter() {
     boat = new FishingBoat();

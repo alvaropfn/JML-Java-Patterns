@@ -28,20 +28,21 @@ package adapter;
  */
 public class Captain implements RowingBoat {
 
-  private RowingBoat rowingBoat;
+  private /*@ spec_public @*/  RowingBoat rowingBoat;
 
   public Captain() {}
+  
 
-  public Captain(RowingBoat rowingBoat) {
+  public Captain(/*@ non_null @*/ RowingBoat rowingBoat) {
     this.rowingBoat = rowingBoat;
   }
-
-  public void setRowingBoat(RowingBoat rowingBoat) {
+  
+  public void setRowingBoat(/*@ non_null @*/ RowingBoat rowingBoat) {
     this.rowingBoat = rowingBoat;
   }
 
   @Override
-  public void row() {
+  public /*@ pure @*/ void row() {
     rowingBoat.row();
   }
 
