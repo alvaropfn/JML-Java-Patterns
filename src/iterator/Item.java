@@ -29,24 +29,27 @@ package iterator;
  */
 public class Item {
 
-  private ItemType type;
-  private String name;
+  private /*@ spec_public nullable @*/ ItemType type;
+  private /*@ spec_public nullable @*/ String name;
 
-  public Item(ItemType type, String name) {
+  
+  //@ assignable name;
+  public Item(/*@ non_null @*/ItemType type, /*@ non_null @*/String name) {
     this.setType(type);
     this.name = name;
   }
-
-  @Override
-  public String toString() {
+  
+  public /*@ pure @*/ String toString() {
     return name;
   }
-
-  public ItemType getType() {
+  
+  public /*@ pure @*/ ItemType getType() {
     return type;
   }
-
-  public final void setType(ItemType type) {
+  
+  //@assignable type;
+  //ensures type != \old(type);
+  public final void setType(/*@ non_null @*/ItemType type) {
     this.type = type;
   }
 }

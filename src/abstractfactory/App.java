@@ -41,52 +41,61 @@ import abstractfactory.App.FactoryMaker.KingdomType;
  */
 public class App {
 
-  private King king;
-  private Castle castle;
-  private Army army;
-
+  private /*@ spec_public nullable @*/ King king;
+  private /*@ spec_public nullable @*/ Castle castle;
+  private /*@ spec_public nullable @*/ Army army;
+  
   /**
    * Creates kingdom
    */
-  public void createKingdom(final KingdomFactory factory) {
+  public void createKingdom(final /*@ non_null @*/ KingdomFactory factory) {
     setKing(factory.createKing());
     setCastle(factory.createCastle());
     setArmy(factory.createArmy());
   }
   
-  King getKing(final KingdomFactory factory) {
+  //@ ensures \result instanceof King;
+  King getKing(final /*@ non_null @*/ KingdomFactory factory) {
     return factory.createKing();
   }
+  
 
-  public King getKing() {
+  public /*@ pure @*/ King getKing() {
     return king;
   }
-
-  private void setKing(final King king) {
+  
+  //@ assignable king;
+  private void setKing(final /*@ non_null @*/ King king) {
     this.king = king;
   }
   
-  Castle getCastle(final KingdomFactory factory) {
+  //@ ensures \result instanceof Castle;
+  Castle getCastle(final /*@ non_null @*/ KingdomFactory factory) {
     return factory.createCastle();
   }
 
-  public Castle getCastle() {
+  //@ ensures \result instanceof Castle;
+  public /*@pure@*/ Castle getCastle() {
     return castle;
   }
-
-  private void setCastle(final Castle castle) {
+  
+  //@ assignable castle;
+  private void setCastle(final /*@ non_null @*/ Castle castle) {
     this.castle = castle;
   }
   
-  Army getArmy(final KingdomFactory factory) {
+  //@ ensures \result instanceof Army;
+  Army getArmy(final /*@ non_null @*/ KingdomFactory factory) {
     return factory.createArmy();
   }
 
-  public Army getArmy() {
+  //@ ensures \result instanceof Army;
+  public /*@pure @*/ Army getArmy() {
     return army;
   }
 
-  private void setArmy(final Army army) {
+  //@ assignable army;
+  private void setArmy(final /*@ non_null @*/ Army army) {
     this.army = army;
   }
 
@@ -105,6 +114,7 @@ public class App {
     /**
      * The factory method to create KingdomFactory concrete objects.
      */
+    //@signals_only IllegalArgumentException;
     public static KingdomFactory makeFactory(KingdomType type) {
       switch (type) {
         case ELF:

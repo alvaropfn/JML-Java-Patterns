@@ -31,14 +31,16 @@ import java.util.List;
  */
 public class TreasureChestItemIterator implements ItemIterator {
 
-  private TreasureChest chest;
-  private int idx;
-  private ItemType type;
+  private /*@spec_public nullable@*/ TreasureChest chest;
+  private /*@spec_public nullable@*/ int idx;
+  private /*@spec_public nullable@*/ ItemType type;
 
   /**
    * Constructor
    */
-  public TreasureChestItemIterator(TreasureChest chest, ItemType type) {
+  //@ ensures chest != null;
+  //@ ensures type != null;
+  public TreasureChestItemIterator(/*@non_null@*/TreasureChest chest,/*@non_null@*/ ItemType type) {
     this.chest = chest;
     this.type = type;
     this.idx = -1;
@@ -57,9 +59,10 @@ public class TreasureChestItemIterator implements ItemIterator {
     }
     return null;
   }
-
+  
   private int findNextIdx() {
-
+	//@ invariant (\forall int i; 0 <= i && i < items.size(); items.get(i).equals(\old(items).get(i)));
+	//@ requires items.size >= 0;
     List<Item> items = chest.getItems();
     boolean found = false;
     int tempIdx = idx;

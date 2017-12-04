@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class TreasureChest {
 
-  private List<Item> items;
+  private /*@spec_public @*/ List<Item> items;
 
   /**
    * Constructor
@@ -51,14 +51,15 @@ public class TreasureChest {
     items.add(new Item(ItemType.WEAPON, "Dagger of poison"));
   }
 
-  ItemIterator iterator(ItemType itemType) {
+  ItemIterator iterator(/*@non_null@*/ ItemType itemType) {
     return new TreasureChestItemIterator(this, itemType);
   }
 
   /**
    * Get all items
    */
-  public List<Item> getItems() {
+  public /*@ pure @*/ List<Item> getItems() {
+	//@ ensures (\forall int i; 0 <= i && i < list.size(); list.get(i).equals(items.get(i)));
     List<Item> list = new ArrayList<>();
     list.addAll(items);
     return list;

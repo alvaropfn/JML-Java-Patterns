@@ -31,31 +31,27 @@ public class Hammer implements Weapon {
 
   private final /*@ spec_public @*/ Enchantment enchantment;
   
-  
+  //@ assignable enchantment;
   public Hammer(/*@ non_null @*/Enchantment enchantment) {
     this.enchantment = enchantment;
   }
 
-  @Override
-  public void wield() {
+  public /*@ pure @*/ void wield() {
 	  System.out.println("The hammer is wielded.");
     enchantment.onActivate();
   }
 
-  @Override
-  public void swing() {
+  public /*@ pure @*/ void swing() {
 	  System.out.println("The hammer is swinged.");
     enchantment.apply();
   }
 
-  @Override
-  public void unwield() {
+  public /*@ pure @*/ void unwield() {
 	  System.out.println("The hammer is unwielded.");
     enchantment.onDeactivate();
   }
-
-  @Override
-  public Enchantment getEnchantment() {
+  
+  public /*@ pure @*/ Enchantment getEnchantment() {
     return enchantment;
   }
 }

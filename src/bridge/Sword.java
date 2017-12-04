@@ -29,32 +29,29 @@ package bridge;
  */
 public class Sword implements Weapon {
 
-  private final Enchantment enchantment;
-
-  public Sword(Enchantment enchantment) {
+  private final /*@ spec_public @*/ Enchantment enchantment;
+  
+  //@assignable enchantment;
+  public Sword(/*@ non_null @*/ Enchantment enchantment) {
     this.enchantment = enchantment;
   }
 
-  @Override
-  public void wield() {
+  public /*@ pure @*/ void wield() {
 	  System.out.println("The sword is wielded.");
     enchantment.onActivate();
   }
 
-  @Override
-  public void swing() {
+  public /*@ pure @*/ void swing() {
 	  System.out.println("The sword is swinged.");
     enchantment.apply();
   }
 
-  @Override
-  public void unwield() {
+  public /*@ pure @*/ void unwield() {
 	  System.out.println("The sword is unwielded.");
     enchantment.onDeactivate();
   }
 
-  @Override
-  public Enchantment getEnchantment() {
+  public /*@ pure @*/ Enchantment getEnchantment() {
     return enchantment;
   }
 }
