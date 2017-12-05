@@ -30,7 +30,7 @@ public enum EnumIvoryTower {
   INSTANCE;
 
   @Override
-  public String toString() {
+  public /*@pure@*/ String toString() {
     return getDeclaringClass().getCanonicalName() + "@" + hashCode();
   }
 }
