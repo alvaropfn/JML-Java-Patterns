@@ -1,0 +1,9 @@
+/abstractfactory/
+/adapter/
+/bridge/
+/builder/
+/command/
+/decorator/
+/iterator/
+/singleton/
+/composite/
