@@ -34,7 +34,7 @@ public class GHobbits implements Race {
 
 
   @Override
-  public void update(GWeather weather, WeatherType weatherType) {
+  public /*@ pure @*/ void update(/*@ non_null @*/GWeather weather, /*@ non_null @*/ WeatherType weatherType) {
     switch (weatherType) {
       case COLD:
         System.out.println("The hobbits are shivering in the cold weather.");

@@ -32,7 +32,7 @@ import observer.WeatherType;
 public class GOrcs implements Race {
 
   @Override
-  public void update(GWeather weather, WeatherType weatherType) {
+  public /*@ pure @*/ void update(/*@ non_null @*/GWeather weather, /*@ non_null @*/ WeatherType weatherType) {
     switch (weatherType) {
       case COLD:
         System.out.println("The orcs are freezing cold.");

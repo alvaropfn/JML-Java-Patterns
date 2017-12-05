@@ -33,18 +33,30 @@ import java.util.List;
  */
 public class Weather {
 	
-  private WeatherType currentWeather;
-  private List<WeatherObserver> observers;
+  private /*@ spec_public nullable @*/ WeatherType currentWeather;
+  private /*@ spec_public nullable @*/ List<WeatherObserver> observers;
 
+  /*@	ensures currentWeather != null;
+    	ensures observers != null;
+     	ensures observers.size() == 0;
+   @*/
   public Weather() {
     observers = new ArrayList<>();
     currentWeather = WeatherType.SUNNY;
   }
 
-  public void addObserver(WeatherObserver obs) {
+  //@ requires observers != null;
+  //@ ensures observers.get(observers.size()-1).equals(obs);
+  //@ ensures (\forall int i; 0 <= i && i < observers.size()-1; observers.get(i).equals(observers.get(i)));
+  public void addObserver(/*@ non_null @*/ WeatherObserver obs) {
     observers.add(obs);
   }
-
+  
+  //@ requires observers != null;
+  /* ensures (\forall int i, diff; diff >= 0 && diff <= 2 && 0 <= i && i < \old(observers).size();
+ 			(if(diff > 1) breaks;)
+ 			(if(!\old(observers).get(i).equals(observers.get(i - diff))) diff++;));
+	@*/
   public void removeObserver(WeatherObserver obs) {
     observers.remove(obs);
   }

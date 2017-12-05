@@ -34,16 +34,26 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public abstract class Observable<S extends Observable<S, O, A>, O extends Observer<S, O, A>, A> {
 
-  protected List<O> observers;
+  protected /*@spec_public nullable@*/ List<O> observers;
 
+  //@ ensures observers != null;
   public Observable() {
     this.observers = new CopyOnWriteArrayList<>();
   }
 
-  public void addObserver(O observer) {
+  //@ requires observers != null;
+  //@ ensures observers.get(observers.size()-1).equals(observer);
+  //@ ensures (\forall int i; 0 <= i && i < observers.size()-1; observers.get(i).equals(observers.get(i)));
+  public void addObserver(/*@ non_null @*/ O observer) {
     this.observers.add(observer);
   }
 
+  //@ requires observer != null;
+  /*@ requires observers != null;
+  /* ensures (\forall int i, diff; diff >= 0 && diff <= 2 && 0 <= i && i < \old(observers).size();
+ 			(if(diff > 1) breaks;)
+ 			(if(!\old(observers).get(i).equals(observers.get(i - diff))) diff++;));
+	@*/
   public void removeObserver(O observer) {
     this.observers.remove(observer);
   }
@@ -51,6 +61,7 @@ public abstract class Observable<S extends Observable<S, O, A>, O extends Observ
   /**
    * Notify observers
    */
+  //@ ensures (\forall int i; 0 <= i && i < observers.size()-1; observers.get(i).equals(observers.get(i)));
   @SuppressWarnings("unchecked")
   public void notifyObservers(A argument) {
     for (O observer : observers) {

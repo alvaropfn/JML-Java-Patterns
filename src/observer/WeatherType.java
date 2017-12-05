@@ -32,7 +32,7 @@ public enum WeatherType {
   SUNNY, RAINY, WINDY, COLD;
 
   @Override
-  public String toString() {
+  public /*@pure@*/ String toString() {
     return this.name().toLowerCase();
   }
 }

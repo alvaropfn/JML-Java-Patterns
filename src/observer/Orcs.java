@@ -30,8 +30,7 @@ package observer;
 public class Orcs implements WeatherObserver {
 
   @Override
-  public void update(WeatherType currentWeather) {
-    switch (currentWeather) {
+  public /*@ pure @*/void update(/*@ non_null @*/WeatherType currentWeather) {    switch (currentWeather) {
       case COLD:
         System.out.println("The orcs are freezing cold.");
         break;

@@ -22,6 +22,8 @@
  */
 package observer;
 
+import observer.generic.GWeather;
+
 /**
  * 
  * Hobbits
@@ -30,7 +32,8 @@ package observer;
 public class Hobbits implements WeatherObserver {
 
   @Override
-  public void update(WeatherType currentWeather) {
+  
+  public /*@ pure @*/void update(/*@ non_null @*/WeatherType currentWeather) {
     switch (currentWeather) {
       case COLD:
         System.out.println("The hobbits are shivering in the cold weather.");
