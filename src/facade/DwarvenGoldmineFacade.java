@@ -47,7 +47,7 @@ public class DwarvenGoldmineFacade {
 	/*@ ensures workers != null;
 		ensures workers.size() >= 0;
 		ensures (\forall int i ; i>= 0 && i < workers.size() ; workers.get(i) != null);
-@*/
+	  @*/
     workers.add(new DwarvenGoldDigger());
     workers.add(new DwarvenCartOperator());
     workers.add(new DwarvenTunnelDigger());
@@ -67,9 +67,7 @@ public class DwarvenGoldmineFacade {
 
   private static void makeActions(Collection<DwarvenMineWorker> workers,
       DwarvenMineWorker.Action... actions) {
-	  //workers.
 	  for (DwarvenMineWorker worker : workers) {
-		  //workers.contains(worker);
 		  /*@ assert (\forall worker;
    	 	  @				 workers.contains(worker) == true;)		
    	      @*/
