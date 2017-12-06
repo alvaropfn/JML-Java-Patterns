@@ -32,7 +32,7 @@ public class OrcCastle implements Castle {
   static final String DESCRIPTION = "This is the Orc castle!";
 
   @Override
-  public String getDescription() {
+  public /*@pure@*/ String getDescription() {
     return DESCRIPTION;
   }
 }

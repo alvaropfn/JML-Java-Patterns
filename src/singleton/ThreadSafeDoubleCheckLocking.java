@@ -33,11 +33,12 @@ package singleton;
  */
 public final class ThreadSafeDoubleCheckLocking {
 
-  private static volatile ThreadSafeDoubleCheckLocking instance;
+  private static volatile /*@spec_public nullable@*/ ThreadSafeDoubleCheckLocking instance;
 
   /**
    * private constructor to prevent client from instantiating.
    */
+  //@ signals_only IllegalStateException;
   private ThreadSafeDoubleCheckLocking() {
     // to prevent instantiating by Reflection call
     if (instance != null) {
@@ -50,6 +51,8 @@ public final class ThreadSafeDoubleCheckLocking {
    *
    * @return an instance of the class.
    */
+  //@ assignable instance;
+  //@ ensures instance != null;
   public static ThreadSafeDoubleCheckLocking getInstance() {
     // local variable increases performance by 25 percent
     // Joshua Bloch "Effective Java, Second Edition", p. 283-284

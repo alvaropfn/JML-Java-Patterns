@@ -52,6 +52,8 @@ public class TreasureChestItemIterator implements ItemIterator {
   }
 
   @Override
+  //@ensures \result instanceof Item || \result ==null;
+  //invariant chest.getItems().size() == \old(chest.getItems()).size();
   public Item next() {
     idx = findNextIdx();
     if (idx != -1) {
@@ -63,6 +65,8 @@ public class TreasureChestItemIterator implements ItemIterator {
   private int findNextIdx() {
 	//@ invariant (\forall int i; 0 <= i && i < items.size(); items.get(i).equals(\old(items).get(i)));
 	//@ requires items.size >= 0;
+	//@ ensures \result >= -1 && \result < itens.size();
+	//@ ensures idx >= -1 || idx < items.size();
     List<Item> items = chest.getItems();
     boolean found = false;
     int tempIdx = idx;

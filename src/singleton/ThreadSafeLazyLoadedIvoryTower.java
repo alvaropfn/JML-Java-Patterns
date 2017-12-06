@@ -31,8 +31,9 @@ package  singleton;
  */
 public final class ThreadSafeLazyLoadedIvoryTower {
 
-  private static ThreadSafeLazyLoadedIvoryTower instance;
+  private static /*@spec_public nullable@*/ ThreadSafeLazyLoadedIvoryTower instance;
 
+  //@signals_only IllegalStateException;
   private ThreadSafeLazyLoadedIvoryTower() {
   // to prevent instantiating by Reflection call
     if (instance != null) {
@@ -43,6 +44,9 @@ public final class ThreadSafeLazyLoadedIvoryTower {
   /**
    * The instance gets created only when it is called for first time. Lazy-loading
    */
+  //@ assignable instance;
+  //@ ensures instance != null;
+  //@ ensures \result instanceof ThreadSafeLazyLoadedIvoryTower;
   public static synchronized ThreadSafeLazyLoadedIvoryTower getInstance() {
 
     if (instance == null) {
