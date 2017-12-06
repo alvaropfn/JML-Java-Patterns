@@ -38,8 +38,7 @@ public final class ThreadSafeDoubleCheckLocking {
   /**
    * private constructor to prevent client from instantiating.
    */
-  
-  //@signals_only IllegalStateException;
+  //@ signals_only IllegalStateException;
   private ThreadSafeDoubleCheckLocking() {
     // to prevent instantiating by Reflection call
     if (instance != null) {

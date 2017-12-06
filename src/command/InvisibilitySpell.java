@@ -29,12 +29,11 @@ package command;
  */
 public class InvisibilitySpell extends Command {
 
-  private /*@ spec_public @*/ Target target;
+  private /*@ spec_public nullable@*/ Target target;
 
   @Override
   //@ assignable target;
-  //@ ensures target != \old(target);
-  public void execute(Target target) {
+  public void execute(/*@non_null@*/Target target) {
     target.setVisibility(Visibility.INVISIBLE);
     this.target = target;
   }

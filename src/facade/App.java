@@ -20,39 +20,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package  singleton;
+package facade;
 
 /**
- * Thread-safe Singleton class. The instance is lazily initialized and thus needs synchronization
- * mechanism.
- *
- * Note: if created by reflection then a singleton will not be created but multiple options in the
- * same classloader
+ * 
+ * The Facade design pattern is often used when a system is very complex or difficult to understand
+ * because the system has a large number of interdependent classes or its source code is
+ * unavailable. This pattern hides the complexities of the larger system and provides a simpler
+ * interface to the client. It typically involves a single wrapper class which contains a set of
+ * members required by client. These members access the system on behalf of the facade client and
+ * hide the implementation details.
+ * <p>
+ * In this example the Facade is ({@link DwarvenGoldmineFacade}) and it provides a simpler interface
+ * to the goldmine subsystem.
+ * 
  */
-public final class ThreadSafeLazyLoadedIvoryTower {
-
-  private static /*@spec_public nullable@*/ ThreadSafeLazyLoadedIvoryTower instance;
-
-  //@signals_only IllegalStateException;
-  private ThreadSafeLazyLoadedIvoryTower() {
-  // to prevent instantiating by Reflection call
-    if (instance != null) {
-      throw new IllegalStateException("Already initialized.");
-    }
-  }
+public class App {
 
   /**
-   * The instance gets created only when it is called for first time. Lazy-loading
+   * Program entry point
+   * 
+   * @param args command line args
    */
-  //@ assignable instance;
-  //@ ensures instance != null;
-  //@ ensures \result instanceof ThreadSafeLazyLoadedIvoryTower;
-  public static synchronized ThreadSafeLazyLoadedIvoryTower getInstance() {
-
-    if (instance == null) {
-      instance = new ThreadSafeLazyLoadedIvoryTower();
-    }
-
-    return instance;
+  public static void main(String[] args) {
+    DwarvenGoldmineFacade facade = new DwarvenGoldmineFacade();
+    facade.startNewDay();
+    facade.digOutGold();
+    facade.endDay();
   }
 }

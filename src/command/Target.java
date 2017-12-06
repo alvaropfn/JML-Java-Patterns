@@ -31,9 +31,9 @@ package command;
 public abstract class Target {
 
 
-  private /*@ spec_public @*/ Size size;
+  private /*@ spec_public nullable@*/ Size size;
 
-  private /*@ spec_public @*/ Visibility visibility;
+  private /*@ spec_public nullable@*/ Visibility visibility;
 
   public /*@ pure @*/ Size getSize() {
     return size;
@@ -48,7 +48,7 @@ public abstract class Target {
     return visibility;
   }
   
-  //@ ensures visibility != \old(visibility);
+  //@assignable visibility;
   public void setVisibility (/*@non_null@*/Visibility visibility) {
     this.visibility = visibility;
   }

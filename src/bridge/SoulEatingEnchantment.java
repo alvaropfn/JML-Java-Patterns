@@ -30,17 +30,17 @@ package bridge;
 public class SoulEatingEnchantment implements Enchantment {
 
   @Override
-  public void onActivate() {
+  public /*@pure@*/ void  onActivate() {
 	  System.out.println("The item spreads bloodlust.");
   }
 
   @Override
-  public void apply() {
+  public /*@pure@*/ void apply() {
 	  System.out.println("The item eats the soul of enemies.");
   }
 
   @Override
-  public void onDeactivate() {
+  public /*@pure@*/ void onDeactivate() {
 	  System.out.println("Bloodlust slowly disappears.");
   }
 }

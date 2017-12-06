@@ -37,6 +37,9 @@ public class TreasureChest {
   /**
    * Constructor
    */
+  /*@ensures items != null;
+   	ensures items.size() > 0;
+   @*/
   public TreasureChest() {
     items = new ArrayList<>();
     items.add(new Item(ItemType.POTION, "Potion of courage"));

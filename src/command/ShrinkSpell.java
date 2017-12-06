@@ -29,12 +29,12 @@ package command;
  */
 public class ShrinkSpell extends Command {
 
-  private /*@ spec_public @*/ Size oldSize;
-  private /*@ spec_public @*/ Target target;
+  private /*@ spec_public nullable@*/ Size oldSize;
+  private /*@ spec_public nullable@*/ Target target;
 
   //@ assignable target;
-  //@ ensures target != \old(target);
-  public void execute(Target target) {
+  //@ ensures target.getSize() != null;
+  public void execute(/*@non_null@*/Target target) {
     oldSize = target.getSize();
     target.setSize(Size.SMALL);
     this.target = target;
@@ -55,7 +55,7 @@ public class ShrinkSpell extends Command {
   }
 
   @Override
-  public String toString() {
+  public /*@pure@*/ String toString() {
     return "Shrink spell";
   }
 }

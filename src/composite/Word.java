@@ -20,39 +20,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package  singleton;
+package composite;
+
+import java.util.List;
 
 /**
- * Thread-safe Singleton class. The instance is lazily initialized and thus needs synchronization
- * mechanism.
  *
- * Note: if created by reflection then a singleton will not be created but multiple options in the
- * same classloader
+ * Word
+ *
  */
-public final class ThreadSafeLazyLoadedIvoryTower {
+public class Word extends LetterComposite {
 
-  private static /*@spec_public nullable@*/ ThreadSafeLazyLoadedIvoryTower instance;
-
-  //@signals_only IllegalStateException;
-  private ThreadSafeLazyLoadedIvoryTower() {
-  // to prevent instantiating by Reflection call
-    if (instance != null) {
-      throw new IllegalStateException("Already initialized.");
+  /**
+   * Constructor
+   */
+  
+  public Word(List<Letter> letters) {
+    for (Letter l : letters) {
+      this.add(l);
     }
   }
 
-  /**
-   * The instance gets created only when it is called for first time. Lazy-loading
-   */
-  //@ assignable instance;
-  //@ ensures instance != null;
-  //@ ensures \result instanceof ThreadSafeLazyLoadedIvoryTower;
-  public static synchronized ThreadSafeLazyLoadedIvoryTower getInstance() {
-
-    if (instance == null) {
-      instance = new ThreadSafeLazyLoadedIvoryTower();
-    }
-
-    return instance;
+  @Override
+  protected void printThisBefore() {
+    System.out.print(" ");
   }
 }

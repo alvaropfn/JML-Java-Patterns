@@ -20,39 +20,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package  singleton;
-
+package composite;
 /**
- * Thread-safe Singleton class. The instance is lazily initialized and thus needs synchronization
- * mechanism.
- *
- * Note: if created by reflection then a singleton will not be created but multiple options in the
- * same classloader
+ * The Composite pattern is a partitioning design pattern. The Composite pattern describes that a
+ * group of objects is to be treated in the same way as a single instance of an object. The intent
+ * of a composite is to "compose" objects into tree structures to represent part-whole hierarchies.
+ * Implementing the Composite pattern lets clients treat individual objects and compositions
+ * uniformly.
+ * <p>
+ * In this example we have sentences composed of words composed of letters. All of the objects can
+ * be treated through the same interface ({@link LetterComposite}).
+ * 
  */
-public final class ThreadSafeLazyLoadedIvoryTower {
-
-  private static /*@spec_public nullable@*/ ThreadSafeLazyLoadedIvoryTower instance;
-
-  //@signals_only IllegalStateException;
-  private ThreadSafeLazyLoadedIvoryTower() {
-  // to prevent instantiating by Reflection call
-    if (instance != null) {
-      throw new IllegalStateException("Already initialized.");
-    }
-  }
-
+public class App {
   /**
-   * The instance gets created only when it is called for first time. Lazy-loading
+   * Program entry point
+   * 
+   * @param args command line args
    */
-  //@ assignable instance;
-  //@ ensures instance != null;
-  //@ ensures \result instanceof ThreadSafeLazyLoadedIvoryTower;
-  public static synchronized ThreadSafeLazyLoadedIvoryTower getInstance() {
+  public static void main(String[] args) {
+	  
+	System.out.println("Message from the orcs: ");  
+    LetterComposite orcMessage = new Messenger().messageFromOrcs();
+    orcMessage.print();
 
-    if (instance == null) {
-      instance = new ThreadSafeLazyLoadedIvoryTower();
-    }
-
-    return instance;
+    System.out.println("\nMessage from the elves: ");
+    LetterComposite elfMessage = new Messenger().messageFromElves();
+    elfMessage.print();
   }
 }
