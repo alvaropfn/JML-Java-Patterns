@@ -3,7 +3,8 @@
 /bridge/
 /builder/
 /command/
+/composite/
 /decorator/
+/facade/
 /iterator/
 /singleton/
-/composite/
