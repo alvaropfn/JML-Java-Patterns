@@ -36,13 +36,18 @@ import java.util.List;
  */
 public class DwarvenGoldmineFacade {
 
-  private final List<DwarvenMineWorker> workers;
+  private /*spec_public nullable*/ final List<DwarvenMineWorker> workers;
 
   /**
    * Constructor
    */
+  
   public DwarvenGoldmineFacade() {
-    /*@ non_null @*/ workers = new ArrayList<>();
+	workers = new ArrayList<>();
+	/*@ ensures workers != null;
+		ensures workers.size() >= 0;
+		ensures (\forall int i ; i>= 0 && i < workers.size() ; workers.get(i) != null);
+@*/
     workers.add(new DwarvenGoldDigger());
     workers.add(new DwarvenCartOperator());
     workers.add(new DwarvenTunnelDigger());

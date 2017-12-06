@@ -32,10 +32,11 @@ import java.util.List;
  */
 public abstract class LetterComposite {
 
-  private /*@ spec_public @*/ List<LetterComposite> children = new ArrayList<>();
+  private /*@ spec_public nullable@*/ List<LetterComposite> children = new ArrayList<>();
 
   /*@  requires letter != null; 
     @  ensures children.size() > \old(children.size());
+    @  ensures children.get(children.size()-1).equals(letter);
     @*/
   public void add(LetterComposite letter) {
     children.add(letter);
