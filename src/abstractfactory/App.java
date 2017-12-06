@@ -114,7 +114,13 @@ public class App {
     /**
      * The factory method to create KingdomFactory concrete objects.
      */
-    //@signals_only IllegalArgumentException;
+    /*public normal_behavior
+      		ensures \result instanceof KingdomFactory;
+      	also
+      public exceptional_behavior
+      		
+      		signals_only IllegalArgumentException;
+     @*/
     public static KingdomFactory makeFactory(KingdomType type) {
       switch (type) {
         case ELF:

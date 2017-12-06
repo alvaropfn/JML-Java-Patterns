@@ -29,12 +29,12 @@ package builder;
  */
 public final class Hero {
 
-  private /*@ spec_public @*/ final Profession profession;
-  private /*@ spec_public @*/ final String name;
-  private /*@ spec_public @*/ final HairType hairType;
-  private /*@ spec_public @*/ final HairColor hairColor;
-  private /*@ spec_public @*/ final Armor armor;
-  private /*@ spec_public @*/ final Weapon weapon;
+  private /*@ spec_public nullable@*/ final Profession profession;
+  private /*@ spec_public nullable@*/ final String name;
+  private /*@ spec_public nullable@*/ final HairType hairType;
+  private /*@ spec_public nullable@*/ final HairColor hairColor;
+  private /*@ spec_public nullable@*/ final Armor armor;
+  private /*@ spec_public nullable@*/ final Weapon weapon;
 
   /*@ 	ensures profession != \old(profession);
    		ensures hairColor != \old(hairColor);
@@ -53,32 +53,36 @@ public final class Hero {
     this.armor = builder.armor;
   }
 
-  public Profession getProfession() {
+  public /*@pure@*/ Profession getProfession() {
     return profession;
   }
 
-  public String getName() {
+  public /*@pure@*/ String getName() {
     return name;
   }
 
-  public HairType getHairType() {
+  public /*@pure@*/ HairType getHairType() {
     return hairType;
   }
 
-  public HairColor getHairColor() {
+  public /*@pure@*/ HairColor getHairColor() {
     return hairColor;
   }
 
-  public Armor getArmor() {
+  public /*@pure@*/ Armor getArmor() {
     return armor;
   }
   
   
-  public Weapon getWeapon() {
-    return /*@ non_null @*/weapon;
+  public /*@pure@*/ Weapon getWeapon() {
+    return weapon;
   }
 
   @Override
+  /*@ 	requires profession != null;
+   		requires name != null;
+   		also ensures \result != null;
+  @*/
   public String toString() {
 
     StringBuilder sb = new StringBuilder();
@@ -113,25 +117,27 @@ public final class Hero {
    */
   public static class Builder {
 
-    private final /*@ spec_public @*/ Profession profession;
-    private final /*@ spec_public @*/ String name;
-    private /*@ spec_public @*/ HairType hairType;
-    private /*@ spec_public @*/ HairColor hairColor;
-    private /*@ spec_public @*/ Armor armor;
-    private /*@ spec_public @*/ Weapon weapon;
+    private final /*@ spec_public nullable@*/ Profession profession;
+    private final /*@ spec_public nullable@*/ String name;
+    private /*@ spec_public nullable@*/ HairType hairType;
+    private /*@ spec_public nullable@*/ HairColor hairColor;
+    private /*@ spec_public nullable@*/ Armor armor;
+    private /*@ spec_public nullable@*/ Weapon weapon;
 
     /**
      * Constructor
      */
-    /*@public normal_behavior
-      	requires profession != null;
-      	requires name != null;
-      	also
-      	public exceptional_behavior
-      	signals_only IllegalArgumentException;
-     @*/
-    //@ assignable profession;
-    //@ assignable name;
+    
+    /*@		public normal_behavior
+      			assignable profession;
+    			assignable name;
+				ensures profession != null;
+				ensures name != null;
+			also
+			public exceptional_behavior
+				requires profession == null || name == null;
+				signals_only IllegalArgumentException;
+	@*/
     public Builder(Profession profession, String name) {
       if (profession == null || name == null) {
         throw new IllegalArgumentException("profession and name can not be null");
@@ -140,40 +146,32 @@ public final class Hero {
       this.name = name;
     }
     
-    /*@ assignable profession;
-      	ensures hairType != \old(hairType);
-     @*/
-    public Builder withHairType(/*@ non_null @*/ HairType hairType) {
+    /*@ assignable hairType;@*/
+    public Builder withHairType( HairType hairType) {
       this.hairType = hairType;
       return this;
     }
 
-    /*@ assignable hairColor;
-  		ensures hairColor != \old(hairColor);
- 	@*/
-    public Builder withHairColor(/*@ non_null @*/HairColor hairColor) {
+    /*@ assignable hairColor;@*/
+    public Builder withHairColor(HairColor hairColor) {
       this.hairColor = hairColor;
       return this;
     }
 
-    /*@ assignable armor;
-		ensures armor != \old(armor);
-	@*/
-    public Builder withArmor(/*@ non_null @*/Armor armor) {
+    /*@ assignable armor;@*/
+    public Builder withArmor(Armor armor) {
       this.armor = armor;
       return this;
     }
 
-    /*@ assignable weapon;
-		ensures weapon != \old(weapon);
-	@*/
-    public Builder withWeapon(/*@ non_null @*/Weapon weapon) {
+    /*@ assignable weapon;@*/
+    public Builder withWeapon(Weapon weapon) {
       this.weapon = weapon;
       return this;
     }
     
     
-    public /*@ pure @*/Hero build() {
+    public Hero build() {
       return new Hero(this);
     }
   }

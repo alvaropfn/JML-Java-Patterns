@@ -46,6 +46,7 @@ public final class ThreadSafeLazyLoadedIvoryTower {
    */
   //@ assignable instance;
   //@ ensures instance != null;
+  //@ ensures \result instanceof ThreadSafeLazyLoadedIvoryTower;
   public static synchronized ThreadSafeLazyLoadedIvoryTower getInstance() {
 
     if (instance == null) {
