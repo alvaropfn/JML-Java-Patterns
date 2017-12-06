@@ -1,6 +1,6 @@
 
 
-const path = __dirname
+const path = __dirname + "/src"
 
 var _getAllFilesFromFolder = function(dir) {
   

@@ -1,0 +1,16 @@
+ITEM	QUANTIDADE	abstractfactory	adapter	bridge	builder	command	composite	decorator	facade	iterator	observer	singleton
+Número de Classes	54	9	4	5	2	5	5	3	5	4	7	5
+Quantidade de Métodos	203	31	9	23	22	29	15	11	20	12	19	12
+Herança e Interface	27	4	1	2	5	4	1	1	1	2	5	1
+LOC	5231											
+invariant	3						1			2		
+initially	0											
+constraint	1	1										
+assignable	21	3		2	7	4		1		2		2
+requires	12		1		3		1			1	5	1
+ensures	49	6	1		9	2	2		3	9	11	6
+behaviour (normal and exceptional)	16	2	2		2	2		7		1		
+\forall	10						1		2	2	5	
+\exists	0											
+Modelos (represents)	0											
+behaviour subtyping	0											
